@@ -2,6 +2,7 @@
 import styles from "./page.module.css";
 import { useState, useEffect, useRef } from "react";
 import { Client, fql } from "fauna";
+import Link from "next/link";
 
 export default function Home() {
   const [roomName, setRoomName] = useState("");
@@ -83,7 +84,7 @@ export default function Home() {
           <h2>Existing rooms</h2>
           {existingRooms.map((room) => (
             <div key={room?.id}>
-              <button>{room.name}</button>
+              <Link href={`/rooms/${room.id}`}>{room.name}</Link>
             </div>
           ))}
         </div>
