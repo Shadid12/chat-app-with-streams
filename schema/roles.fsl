@@ -1,0 +1,25 @@
+role UnAuthRole {
+  privileges UserRegistration {
+    call
+  }
+
+  privileges UserLogin {
+    call
+  }
+}
+
+role AuthRole {
+  privileges Room {
+    read
+    create
+    write
+    delete
+  }
+
+  privileges Message {
+    read
+    create
+    write
+    delete
+  }
+}

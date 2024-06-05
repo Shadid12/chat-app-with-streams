@@ -1,0 +1,19 @@
+@role("server")
+function UserRegistration(username, email, password) {
+  let user = User.create({
+    username: username,
+    email: email
+  })
+
+  Credentials.create({
+    document: user,
+    password: password
+  })
+}
+
+@role("server")
+function UserLogin(email, password) {
+  let user = User.byEmail(email)
+  Credentials.byDocument(user)!
+    .login(password, Time.now().add(3600, "seconds"))
+}
