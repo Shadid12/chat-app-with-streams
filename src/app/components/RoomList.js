@@ -3,10 +3,10 @@ import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { Client, fql } from 'fauna';
 
-export default function RoomList({ rooms }) {
+export default function RoomList({ rooms, token }) {
 
   const client = new Client({ 
-    secret: process.env.NEXT_PUBLIC_FAUNA_KEY 
+    secret: token
   });
 
 

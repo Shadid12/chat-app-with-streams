@@ -27,8 +27,9 @@ export default async function Home() {
 
   const createNewRoom = async (formData) => {
     'use server'
+    const token = cookies().get('chat-app')?.value;
     const client = new Client({ 
-      secret: process.env.NEXT_PUBLIC_FAUNA_KEY 
+      secret: token
     });
     try {
       const roomName = formData.get('roomName');
@@ -54,7 +55,7 @@ export default async function Home() {
           />
           <button type="submit">Create room</button>
         </form>
-        <RoomList rooms={rooms} />
+        <RoomList rooms={rooms} token={token}/>
       </div>
     </main>
   );
