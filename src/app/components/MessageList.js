@@ -55,7 +55,10 @@ export default function MessageList({ messages, roomId, token }) {
   return (
     <div>
       {allMessages.map((msg, i) => (
-        <div key={i}>{msg.text}</div>
+        <div key={i}>
+          <strong>{msg.authorName}: </strong>
+          <span>{msg.text}</span>
+        </div>
       ))}
     </div>
   )
