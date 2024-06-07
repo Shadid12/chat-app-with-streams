@@ -2,11 +2,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Client, fql } from 'fauna';
 
-export default function MessageList({ messages, roomId }) {
+export default function MessageList({ messages, roomId, token }) {
   const [allMessages, setAllMessages] = useState(messages)
 
   const client = new Client({
-    secret: process.env.NEXT_PUBLIC_FAUNA_KEY
+    secret: token
   })
 
   const streamRef = useRef(null)

@@ -19,7 +19,9 @@ export async function doSignin(prevState, formData) {
       UserLogin(${email}, ${password})
     `)
     console.log(response);
-    cookies().set('chat-app', response.data.secret)
+    cookies().set('chat-app', response.data.secret, {
+      expires: Date.now() + 1000 * 60 * 60
+    })
   } catch (error) {
     console.error(error);
     return { message: 'An error occurred' };

@@ -1,10 +1,18 @@
 import styles from "./page.module.css";
 import { Client, fql } from "fauna";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import RoomList from "./components/RoomList";
 
 export default async function Home() {
 
-  const client = new Client({ secret: process.env.NEXT_PUBLIC_FAUNA_KEY });
+  const token = cookies().get('chat-app')?.value;
+
+  if (!token) {
+    redirect('/signin')
+  }
+
+  const client = new Client({ secret: token });
   // server side rendering
   const roomsResponse = await client.query(fql`Room.all()`);
 
