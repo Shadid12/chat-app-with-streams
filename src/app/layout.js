@@ -1,4 +1,6 @@
 import { Inter } from "next/font/google";
+import Link from 'next/link';
+import { cookies } from "next/headers";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -9,9 +11,21 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  async function deleteThemeCookie(formData) {
+    "use server";
+    cookies().delete("chat-app");
+  }
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <nav className="nav">
+          <Link href="/">Home</Link>
+          <form action={deleteThemeCookie}>
+            <button type="submit">Logout</button>
+          </form>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
